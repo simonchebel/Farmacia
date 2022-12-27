@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FarmaciaModelStoreContainer" CdmEntityContainer="FarmaciaEntities">
+    <EntitySetMapping Name="Area">
+      <EntityTypeMapping TypeName="FarmaciaModel.Area">
+        <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="area1" ColumnName="area" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movimiento">
+      <EntityTypeMapping TypeName="FarmaciaModel.Movimiento">
+        <MappingFragment StoreEntitySet="Movimiento">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="idTipoMovimiento" ColumnName="idTipoMovimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recurso">
+      <EntityTypeMapping TypeName="FarmaciaModel.Recurso">
+        <MappingFragment StoreEntitySet="Recurso">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="stockMinimo" ColumnName="stockMinimo" />
+          <ScalarProperty Name="idTipoRecurso" ColumnName="idTipoRecurso" />
+          <ScalarProperty Name="idArea" ColumnName="idArea" />
+          <ScalarProperty Name="idTipoPresentacion" ColumnName="idTipoPresentacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stock">
+      <EntityTypeMapping TypeName="FarmaciaModel.Stock">
+        <MappingFragment StoreEntitySet="Stock">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idRecurso" ColumnName="idRecurso" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
+          <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_Movimiento">
+      <EntityTypeMapping TypeName="FarmaciaModel.Tipo_Movimiento">
+        <MappingFragment StoreEntitySet="Tipo_Movimiento">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tipoMovimiento" ColumnName="tipoMovimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_Presentacion">
+      <EntityTypeMapping TypeName="FarmaciaModel.Tipo_Presentacion">
+        <MappingFragment StoreEntitySet="Tipo_Presentacion">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_Recurso">
+      <EntityTypeMapping TypeName="FarmaciaModel.Tipo_Recurso">
+        <MappingFragment StoreEntitySet="Tipo_Recurso">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

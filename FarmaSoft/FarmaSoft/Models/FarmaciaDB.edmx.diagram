@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2a2a285e8ce54598bffb096f7e980392" Name="Diagram1">
+        <EntityTypeShape EntityType="FarmaciaModel.Area" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.Movimiento" Width="1.5" PointX="5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.Recurso" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.Stock" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.Tipo_Movimiento" Width="1.5" PointX="2.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.Tipo_Presentacion" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FarmaciaModel.Tipo_Recurso" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="FarmaciaModel.FK_Recurso_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel.FK_Movimiento_Tipo_Movimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel.FK_Recurso_Tipo_Presentacion" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel.FK_Recurso_Tipo_Recurso" ManuallyRouted="false" />
+        <AssociationConnector Association="FarmaciaModel.FK_Stock_Recurso" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

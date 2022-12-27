@@ -1,0 +1,16 @@
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\bin\Debug\FarmaSoft.exe.config
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\bin\Debug\FarmaSoft.exe
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\bin\Debug\FarmaSoft.pdb
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\bin\Debug\EntityFramework.dll
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\bin\Debug\EntityFramework.SqlServer.dll
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\bin\Debug\EntityFramework.xml
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\bin\Debug\EntityFramework.SqlServer.xml
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\obj\Debug\FarmaSoft.csproj.AssemblyReference.cache
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\obj\Debug\FarmaSoft.csproj.SuggestedBindingRedirects.cache
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\obj\Debug\FarmaSoft.frmPrincipal.resources
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\obj\Debug\FarmaSoft.Properties.Resources.resources
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\obj\Debug\FarmaSoft.csproj.GenerateResource.cache
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\obj\Debug\FarmaSoft.csproj.CoreCompileInputs.cache
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\obj\Debug\FarmaSoft.csproj.CopyComplete
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\obj\Debug\FarmaSoft.exe
+C:\Proyectos\Farmacia\FarmaSoft\FarmaSoft\obj\Debug\FarmaSoft.pdb

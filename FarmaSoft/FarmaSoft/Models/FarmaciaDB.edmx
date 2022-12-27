@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FarmaciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="area" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movimiento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="idTipoMovimiento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recurso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="precio" Type="real" Nullable="false" />
+          <Property Name="stockMinimo" Type="int" Nullable="false" />
+          <Property Name="idTipoRecurso" Type="int" Nullable="false" />
+          <Property Name="idArea" Type="int" Nullable="false" />
+          <Property Name="idTipoPresentacion" Type="int" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idRecurso" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="fechaIngreso" Type="datetime" Nullable="false" />
+          <Property Name="fechaVencimiento" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipo_Movimiento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="tipoMovimiento" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipo_Presentacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipo_Recurso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Movimiento_Tipo_Movimiento">
+          <End Role="Tipo_Movimiento" Type="Self.Tipo_Movimiento" Multiplicity="1" />
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Movimiento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="idTipoMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurso_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Recurso" Type="Self.Recurso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recurso">
+              <PropertyRef Name="idArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurso_Tipo_Presentacion">
+          <End Role="Tipo_Presentacion" Type="Self.Tipo_Presentacion" Multiplicity="0..1" />
+          <End Role="Recurso" Type="Self.Recurso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Presentacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recurso">
+              <PropertyRef Name="idTipoPresentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurso_Tipo_Recurso">
+          <End Role="Tipo_Recurso" Type="Self.Tipo_Recurso" Multiplicity="1" />
+          <End Role="Recurso" Type="Self.Recurso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Recurso">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recurso">
+              <PropertyRef Name="idTipoRecurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Recurso">
+          <End Role="Recurso" Type="Self.Recurso" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recurso">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="idRecurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FarmaciaModelStoreContainer">
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimiento" EntityType="Self.Movimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recurso" EntityType="Self.Recurso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Movimiento" EntityType="Self.Tipo_Movimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Presentacion" EntityType="Self.Tipo_Presentacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Recurso" EntityType="Self.Tipo_Recurso" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Movimiento_Tipo_Movimiento" Association="Self.FK_Movimiento_Tipo_Movimiento">
+            <End Role="Tipo_Movimiento" EntitySet="Tipo_Movimiento" />
+            <End Role="Movimiento" EntitySet="Movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurso_Area" Association="Self.FK_Recurso_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Recurso" EntitySet="Recurso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurso_Tipo_Presentacion" Association="Self.FK_Recurso_Tipo_Presentacion">
+            <End Role="Tipo_Presentacion" EntitySet="Tipo_Presentacion" />
+            <End Role="Recurso" EntitySet="Recurso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurso_Tipo_Recurso" Association="Self.FK_Recurso_Tipo_Recurso">
+            <End Role="Tipo_Recurso" EntitySet="Tipo_Recurso" />
+            <End Role="Recurso" EntitySet="Recurso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Recurso" Association="Self.FK_Stock_Recurso">
+            <End Role="Recurso" EntitySet="Recurso" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FarmaciaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="area1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Recurso" Relationship="Self.FK_Recurso_Area" FromRole="Area" ToRole="Recurso" />
+        </EntityType>
+        <EntityType Name="Movimiento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idTipoMovimiento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tipo_Movimiento" Relationship="Self.FK_Movimiento_Tipo_Movimiento" FromRole="Movimiento" ToRole="Tipo_Movimiento" />
+        </EntityType>
+        <EntityType Name="Recurso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio" Type="Single" Nullable="false" />
+          <Property Name="stockMinimo" Type="Int32" Nullable="false" />
+          <Property Name="idTipoRecurso" Type="Int32" Nullable="false" />
+          <Property Name="idArea" Type="Int32" Nullable="false" />
+          <Property Name="idTipoPresentacion" Type="Int32" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_Recurso_Area" FromRole="Recurso" ToRole="Area" />
+          <NavigationProperty Name="Tipo_Presentacion" Relationship="Self.FK_Recurso_Tipo_Presentacion" FromRole="Recurso" ToRole="Tipo_Presentacion" />
+          <NavigationProperty Name="Tipo_Recurso" Relationship="Self.FK_Recurso_Tipo_Recurso" FromRole="Recurso" ToRole="Tipo_Recurso" />
+          <NavigationProperty Name="Stock" Relationship="Self.FK_Stock_Recurso" FromRole="Recurso" ToRole="Stock" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idRecurso" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="fechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaVencimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Recurso" Relationship="Self.FK_Stock_Recurso" FromRole="Stock" ToRole="Recurso" />
+        </EntityType>
+        <EntityType Name="Tipo_Movimiento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="tipoMovimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Movimiento" Relationship="Self.FK_Movimiento_Tipo_Movimiento" FromRole="Tipo_Movimiento" ToRole="Movimiento" />
+        </EntityType>
+        <EntityType Name="Tipo_Presentacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Recurso" Relationship="Self.FK_Recurso_Tipo_Presentacion" FromRole="Tipo_Presentacion" ToRole="Recurso" />
+        </EntityType>
+        <EntityType Name="Tipo_Recurso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Recurso" Relationship="Self.FK_Recurso_Tipo_Recurso" FromRole="Tipo_Recurso" ToRole="Recurso" />
+        </EntityType>
+        <Association Name="FK_Recurso_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Recurso" Type="Self.Recurso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recurso">
+              <PropertyRef Name="idArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimiento_Tipo_Movimiento">
+          <End Role="Tipo_Movimiento" Type="Self.Tipo_Movimiento" Multiplicity="1" />
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Movimiento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="idTipoMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurso_Tipo_Presentacion">
+          <End Role="Tipo_Presentacion" Type="Self.Tipo_Presentacion" Multiplicity="0..1" />
+          <End Role="Recurso" Type="Self.Recurso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Presentacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recurso">
+              <PropertyRef Name="idTipoPresentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurso_Tipo_Recurso">
+          <End Role="Tipo_Recurso" Type="Self.Tipo_Recurso" Multiplicity="1" />
+          <End Role="Recurso" Type="Self.Recurso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Recurso">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Recurso">
+              <PropertyRef Name="idTipoRecurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Recurso">
+          <End Role="Recurso" Type="Self.Recurso" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recurso">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="idRecurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FarmaciaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Area" EntityType="Self.Area" />
+          <EntitySet Name="Movimiento" EntityType="Self.Movimiento" />
+          <EntitySet Name="Recurso" EntityType="Self.Recurso" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" />
+          <EntitySet Name="Tipo_Movimiento" EntityType="Self.Tipo_Movimiento" />
+          <EntitySet Name="Tipo_Presentacion" EntityType="Self.Tipo_Presentacion" />
+          <EntitySet Name="Tipo_Recurso" EntityType="Self.Tipo_Recurso" />
+          <AssociationSet Name="FK_Recurso_Area" Association="Self.FK_Recurso_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Recurso" EntitySet="Recurso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimiento_Tipo_Movimiento" Association="Self.FK_Movimiento_Tipo_Movimiento">
+            <End Role="Tipo_Movimiento" EntitySet="Tipo_Movimiento" />
+            <End Role="Movimiento" EntitySet="Movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurso_Tipo_Presentacion" Association="Self.FK_Recurso_Tipo_Presentacion">
+            <End Role="Tipo_Presentacion" EntitySet="Tipo_Presentacion" />
+            <End Role="Recurso" EntitySet="Recurso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurso_Tipo_Recurso" Association="Self.FK_Recurso_Tipo_Recurso">
+            <End Role="Tipo_Recurso" EntitySet="Tipo_Recurso" />
+            <End Role="Recurso" EntitySet="Recurso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Recurso" Association="Self.FK_Stock_Recurso">
+            <End Role="Recurso" EntitySet="Recurso" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FarmaciaModelStoreContainer" CdmEntityContainer="FarmaciaEntities">
+          <EntitySetMapping Name="Area">
+            <EntityTypeMapping TypeName="FarmaciaModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="area1" ColumnName="area" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimiento">
+            <EntityTypeMapping TypeName="FarmaciaModel.Movimiento">
+              <MappingFragment StoreEntitySet="Movimiento">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idTipoMovimiento" ColumnName="idTipoMovimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recurso">
+            <EntityTypeMapping TypeName="FarmaciaModel.Recurso">
+              <MappingFragment StoreEntitySet="Recurso">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="stockMinimo" ColumnName="stockMinimo" />
+                <ScalarProperty Name="idTipoRecurso" ColumnName="idTipoRecurso" />
+                <ScalarProperty Name="idArea" ColumnName="idArea" />
+                <ScalarProperty Name="idTipoPresentacion" ColumnName="idTipoPresentacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stock">
+            <EntityTypeMapping TypeName="FarmaciaModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idRecurso" ColumnName="idRecurso" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
+                <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Movimiento">
+            <EntityTypeMapping TypeName="FarmaciaModel.Tipo_Movimiento">
+              <MappingFragment StoreEntitySet="Tipo_Movimiento">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tipoMovimiento" ColumnName="tipoMovimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Presentacion">
+            <EntityTypeMapping TypeName="FarmaciaModel.Tipo_Presentacion">
+              <MappingFragment StoreEntitySet="Tipo_Presentacion">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Recurso">
+            <EntityTypeMapping TypeName="FarmaciaModel.Tipo_Recurso">
+              <MappingFragment StoreEntitySet="Tipo_Recurso">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
